@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Чебурашка | Анимированное расписание</title>
+    <style>
+        /* ---------- ГЛОБАЛЬНЫЕ СТИЛИ И АНИМАЦИИ ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1e 0%, #0a1a2a 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+            min-height: 100vh;
+            padding: 12px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Анимированный градиентный фон для контейнеров */
+        .box, .box1 {
+            background: rgba(15, 25, 45, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 20px;
+            margin: 16px auto;
+            max-width: 1200px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .box:hover, .box1:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 35px 55px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 215, 0, 0.2);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Стрелка назад */
+        .strelka {
+            font-size: 40px;
+            text-decoration: none;
+            color: #ffd966;
+            background: rgba(0, 0, 0, 0.4);
+            width: 56px;
+            height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .strelka:hover {
+            background: #ffd966;
+            color: #1a2a3a;
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 0 20px rgba(255, 217, 102, 0.6);
+        }
+
+        /* Логотип с анимацией */
+        .logo {
+            width: 90px;
+            border-radius: 50%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s;
+            animation: floatLogo 3s infinite ease-in-out;
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .logo:hover {
+            transform: scale(1.05) rotate(3deg);
+            filter: drop-shadow(0 0 15px #ffd966);
+        }
+
+        /* Заголовок с анимацией букв */
+        h1 {
+            font-size: clamp(32px, 8vw, 64px);
+            font-weight: 800;
+            text-align: center;
+            margin: 16px 0;
+            letter-spacing: 4px;
+        }
+
+        h1 span {
+            display: inline-block;
+            animation: bounceLetter 0.5s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+            color: #ffd966;
+            text-shadow: 0 0 15px rgba(255, 217, 102, 0.5);
+        }
+
+        @keyframes bounceLetter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 span:nth-child(1) { animation-delay: 0.05s; }
+        h1 span:nth-child(2) { animation-delay: 0.1s; }
+        h1 span:nth-child(3) { animation-delay: 0.15s; }
+        h1 span:nth-child(4) { animation-delay: 0.2s; }
+        h1 span:nth-child(5) { animation-delay: 0.25s; }
+        h1 span:nth-child(6) { animation-delay: 0.3s; }
+        h1 span:nth-child(7) { animation-delay: 0.35s; }
+        h1 span:nth-child(8) { animation-delay: 0.4s; }
+        h1 span:nth-child(9) { animation-delay: 0.45s; }
+
+        /* Градиентный текст */
+        .gradient-text {
+            background: linear-gradient(135deg, #fff8e7, #ffd966, #ffb347);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: clamp(14px, 4vw, 22px);
+            text-align: center;
+            font-weight: 500;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Кнопка-переключатель с эффектами */
+        .переключатель-кнопка {
+            background: linear-gradient(45deg, #ffb347, #ff8c00);
+            border: none;
+            padding: 14px 24px;
+            font-size: clamp(14px, 4vw, 20px);
+            font-weight: bold;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+            width: fit-content;
+            min-width: 200px;
+        }
+
+        .переключатель-кнопка:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 28px rgba(255, 140, 0, 0.5);
+            background: linear-gradient(45deg, #ffc107, #ff7b00);
+        }
+
+        .переключатель-кнопка.pressed {
+            transform: scale(0.96);
+            transition: 0.05s linear;
+        }
+
+        /* Скрываемый текст с плавным появлением */
+        .скрываемый-текст {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 28px;
+            padding: 0 12px;
+        }
+
+        .скрываемый-текст.показан {
+            max-height: 3000px;
+            opacity: 1;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        /* Стилизованный select */
+        select {
+            background: #1e2a3a;
+            color: #ffefc0;
+            padding: 12px 16px;
+            border-radius: 50px;
+            border: 1px solid #ffd966;
+            font-size: 14px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        select:hover {
+            background: #2a3a4a;
+            border-color: #ffaa33;
+            box-shadow: 0 0 12px rgba(255, 217, 102, 0.4);
+        }
+
+        /* Форма анонимных вопросов */
+        .box1 h2 {
+            color: #ffdfa5;
+            margin-bottom: 16px;
+            font-size: clamp(18px, 5vw, 28px);
+        }
+
+        textarea {
+            width: 100%;
+            background: #0f1a24;
+            border: 2px solid #ffd96666;
+            border-radius: 24px;
+            padding: 14px;
+            color: white;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ffd966;
+            box-shadow: 0 0 18px rgba(255, 217, 102, 0.3);
+            transform: scale(1.01);
+        }
+
+        button[type="submit"] {
+            background: #ff8c42;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        button[type="submit"]:hover {
+            background: #ffaa55;
+            transform: scale(1.02);
+            box-shadow: 0 5px 18px #ff8c4280;
+        }
+
+        /* ---------- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО ---------- */
+        .slider-container {
+            margin: 20px 0 30px;
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            background: #1a2a3a;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            line-height: 0;
+            cursor: pointer;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 24px;
+            transition: transform 0.2s ease;
+        }
+
+        .slide img:hover {
+            transform: scale(1.02);
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffd966;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .slider-btn:hover {
+            background: #ffd966;
+            color: #1a2a3a;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev {
+            left: 15px;
+        }
+
+        .slider-btn.next {
+            right: 15px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 217, 102, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ffd966;
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        /* ---------- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО ---------- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #ffd966;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 1001;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+            color: #ffaa33;
+        }
+
+        /* Видео блок */
+        .video-section {
+            margin: 20px 0;
+        }
+
+        .video-title {
+            text-align: center;
+            color: #ffd966;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .video {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 24px;
+            display: block;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+            transition: 0.4s;
+            border: 2px solid rgba(255, 217, 102, 0.3);
+        }
+
+        .video:hover {
+            transform: scale(1.01);
+            border-color: #ffd966;
+            box-shadow: 0 0 30px rgba(255, 217, 102, 0.3);
+        }
+
+        /* ---------- ВЕРТИКАЛЬНАЯ ТАБЛИЦА (БЕЗ ГОРИЗОНТАЛЬНОЙ ПРОКРУТКИ) ---------- */
+        .расписание-вертикальное {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        /* Карточка служащего */
+        .служащий-карточка {
+            background: rgba(20, 30, 45, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 217, 102, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .служащий-карточка:hover {
+            transform: translateX(5px);
+            border-color: #ffd966;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Имя служащего */
+        .имя-служащего {
+            background: linear-gradient(135deg, #ffb34730, #ff8c0030);
+            padding: 14px 18px;
+            font-weight: bold;
+            font-size: 18px;
+            color: #ffdd99;
+            border-bottom: 2px solid #ffb347;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .имя-служащего::before {
+            content: "👤";
+            font-size: 20px;
+        }
+
+        /* Сетка дней для каждого служащего */
+        .дни-сетка {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            padding: 14px;
+        }
+
+        /* Ячейка дня */
+        .день-ячейка {
+            background: rgba(30, 40, 55, 0.6);
+            border-radius: 16px;
+            padding: 10px 6px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .название-дня {
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffd966;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .значение-служения {
+            font-size: 14px;
+            font-weight: 500;
+            color: #f0f0f0;
+            padding: 6px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.2s;
+            word-break: break-word;
+        }
+
+        .значение-служения:empty::before {
+            content: "—";
+            opacity: 0.5;
+        }
+
+        /* Зелёная подсветка для "с" */
+        .значение-служения.свободно {
+            background: linear-gradient(145deg, #1e7a4a, #0f5e38);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+            animation: pulseGreen 1.8s infinite;
+        }
+
+        @keyframes pulseGreen {
+            0% {
+                box-shadow: 0 0 0 0 rgba(70, 200, 120, 0.5);
+            }
+            70% {
+                box-shadow: 0 0 0 8px rgba(70, 200, 120, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(70, 200, 120, 0);
+            }
+        }
+
+        .значение-служения.свободно:hover {
+            transform: scale(1.02);
+            filter: brightness(1.1);
+        }
+
+        .значение-служения:hover {
+            background: rgba(50, 70, 95, 0.9);
+            transform: scale(1.02);
+        }
+
+        /* Стиль для подзаголовка (утро/вечер) */
+        .подзаголовок {
+            font-size: 10px;
+            color: #ffaa66;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* Для очень маленьких экранов */
+        @media (max-width: 550px) {
+            .дни-сетка {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            
+            body {
+                padding: 8px;
+            }
+            
+            .box, .box1 {
+                padding: 16px;
+                border-radius: 24px;
+            }
+            
+            .имя-служащего {
+                padding: 10px 14px;
+                font-size: 16px;
+            }
+            
+            .день-ячейка {
+                padding: 8px 4px;
+            }
+            
+            .название-дня {
+                font-size: 10px;
+            }
+            
+            .значение-служения {
+                font-size: 12px;
+                padding: 4px;
+            }
+
+            .slider-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+
+        /* Для средних экранов - 3 колонки */
+        @media (min-width: 551px) and (max-width: 800px) {
+            .дни-сетка {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Стилизация редактируемых полей */
+        [contenteditable="true"] {
+            outline: none;
+        }
+
+        [contenteditable="true"]:focus {
+            background: #2a4a6a;
+            box-shadow: 0 0 0 2px #ffd966;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div class="box">
+
+    <div style="text-align:center"><img class="logo" src="Снимок.jpg" alt="Логотип Чебурашка"></div>
+    <h1>
+        <span>Ч</span><span>е</span><span>б</span><span>у</span><span>р</span><span>а</span><span>ш</span><span>к</span><span>а</span>
+    </h1>
+    <h1 class="gradient-text">Первое собрание и открытие было на Монастырской 96,<br> 8 июля 2014 года.</h1>
+
+    <!-- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО -->
+    <div class="slider-container" id="sliderContainer">
+        <div class="slider-wrapper">
+            <div class="slides" id="slides">
+                <div class="slide">
+                    <img src="Av41eZpQ86FLXqWNyw2C7tZvpUZ7PS5bgsW89vLE1PiOpEJ9iPFXaPPOAgd6HZVDErRbfuw6x1QojCTuAb89xoLW.jpg" alt="Чебурашка 1">
+                </div>
+                <div class="slide">
+                    <img src="vvRcOSlic45vRcXAINFTrRphNgyGPyIL8XpNbjWId3-q0G9gY5YQH7v03uGB2c1a9FKg0PKfn2aNd0p7HOalAYy_.jpg" alt="Чебурашка 2">
+                </div>
+                <div class="slide">
+                    <img src="литвечер.jpg" alt="Чебурашка 3">
+                </div>
+            </div>
+            <button class="slider-btn prev" id="prevBtn">❮</button>
+            <button class="slider-btn next" id="nextBtn">❯</button>
+        </div>
+        <div class="slider-dots" id="dots"></div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img id="modalImage" src="" alt="Увеличенное фото">
+    </div>
+
+    <!-- ВИДЕО БЛОК (отдельно, под слайдером) -->
+    <div class="video-section">
+        <div class="video-title">🎬 Наше видео</div>
+        <video class="video" muted src="video_2025-05-03_02-16-32.mp4" autoplay loop="playsinline"></video>
+    </div>
+
+    <button class="переключатель-кнопка" id="кнопка-переключения">📋 Доступные вакантные служения</button>
+
+    <div class="скрываемый-текст" id="текст-для-переключения">
+        <p style="text-align:center; font-size: clamp(12px, 3.5vw, 1.2rem); margin-bottom: 16px;">
+            🟢 <strong style="color:#6fef9f;">Доступные служения</strong> — ячейки с буквой <strong style="background:#1e7a4a; padding:3px 8px; border-radius:20px; font-size:13px;">с</strong> отмечены зелёным ✨<br>
+            (свободные вакантные служения — нажмите на ячейку, чтобы редактировать)
+        </p>
+        <div id="schedule-container"></div>
+        <br>
+        <label for="mySelect">📅 Собрания проходят:</label>
+        <select id="mySelect" name="mySelect">
+            <option>Понедельник с 18:30 до 20:00</option>
+            <option>Вторник с 18:30 до 20:00</option>
+            <option>Среда с 18:30 до 20:00</option>
+            <option>Четверг с 18:30 до 20:00</option>
+            <option>Пятница с 18:30 до 20:00</option>
+            <option>Суббота с 18:30 до 20:00</option>
+            <option>Воскресенье утро c 10:30 до 12:00</option>
+            <option>Воскресенье вечер с 18:30 до 20:00</option>
+        </select>
+    </div>
+</div>
+
+<div class="box1">
+    <h2>✉️ Отправить анонимный вопрос на собрание гр.Чебурашка</h2>
+    <form id="telegramForm">
+        <label for="message">Сообщение:</label><br>
+        <textarea id="message" name="message" rows="4" required placeholder="Ваш вопрос будет отправлен анонимно..."></textarea><br><br>
+        <button type="submit">🚀 Отправить анонимно</button>
+    </form>
+</div>
+
+<script>
+    // ---------------------- АНИМАЦИЯ КНОПКИ СКРЫТИЯ/ПОКАЗА ----------------------
+    const кнопкаПереключения = document.getElementById('кнопка-переключения');
+    const текстДляПереключения = document.getElementById('текст-для-переключения');
+
+    кнопкаПереключения.addEventListener('click', function() {
+        текстДляПереключения.classList.toggle('показан');
+        if (текстДляПереключения.classList.contains('показан')) {
+            кнопкаПереключения.textContent = '🔒 Скрыть вакантные служения';
+        } else {
+            кнопкаПереключения.textContent = '📋 Доступные вакантные служения';
+        }
+    });
+
+    кнопкаПереключения.addEventListener('mousedown', () => {
+        кнопкаПереключения.classList.add('pressed');
+    });
+    кнопкаПереключения.addEventListener('mouseup', () => {
+        кнопкаПереключения.classList.remove('pressed');
+    });
+    кнопкаПереключения.addEventListener('mouseleave', () => {
+        кнопкаПереключения.classList.remove('pressed');
+    });
+
+    // ---------------------- ТЕЛЕГРАМ ОТПРАВКА ----------------------
+    const TELEGRAM_TOKEN = '7831903358:AAHIkRNmstPV5QYoRC5GYqGiuGppTlLiotk';
+    const CHAT_ID = '-1002657190873';
+
+    document.getElementById('telegramForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const message = document.getElementById('message').value.trim();
+        if (!message) {
+            alert('Пожалуйста, введите сообщение.');
+            return;
+        }
+        const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+        axios.post(url, { chat_id: CHAT_ID, text: message })
+            .then(() => {
+                alert('✅ Сообщение успешно отправлено!');
+                document.getElementById('telegramForm').reset();
+            })
+            .catch((error) => {
+                alert('❌ Ошибка при отправке. Проверьте консоль.');
+                console.error(error);
+            });
+    });
+
+    // ---------------------- СЛАЙДЕР (ИСПРАВЛЕННЫЙ) ----------------------
+    let currentIndex = 0;
+    const slides = document.getElementById('slides');
+    const slidesCount = document.querySelectorAll('.slide').length;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('dots');
+
+    // Создаем точки навигации
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < slidesCount; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (i === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    // Обновляем активную точку
+    function updateDots() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+
+    // Переход к слайду
+    function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= slidesCount) index = slidesCount - 1;
+        currentIndex = index;
+        const offset = -currentIndex * 100;
+        slides.style.transform = `translateX(${offset}%)`;
+        updateDots();
+    }
+
+    // Следующий слайд
+    function nextSlide() {
+        if (currentIndex < slidesCount - 1) {
+            goToSlide(currentIndex + 1);
+        } else {
+            goToSlide(0);
+        }
+    }
+
+    // Предыдущий слайд
+    function prevSlide() {
+        if (currentIndex > 0) {
+            goToSlide(currentIndex - 1);
+        } else {
+            goToSlide(slidesCount - 1);
+        }
+    }
+
+    // Добавляем обработчики
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+    }
+
+    // Инициализация слайдера
+    createDots();
+    goToSlide(0);
+
+    // ---------------------- УВЕЛИЧЕНИЕ ФОТО ПРИ НАЖАТИИ ----------------------
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalClose = document.querySelector('.modal-close');
+
+    // Функция открытия модального окна
+    function openModal(imageSrc) {
+        modal.style.display = 'flex';
+        modalImg.src = imageSrc;
+        document.body.style.overflow = 'hidden'; // Блокируем прокрутку страницы
+    }
+
+    // Функция закрытия модального окна
+    function closeModal() {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        document.body.style.overflow = ''; // Восстанавливаем прокрутку
+    }
+
+    // Добавляем обработчики на все изображения в слайдере
+    const slideImages = document.querySelectorAll('.slide img');
+    slideImages.forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation(); // Останавливаем всплытие, чтобы не конфликтовать с другими событиями
+            openModal(img.src);
+        });
+    });
+
+    // Закрытие по клику на крестик
+    if (modalClose) {
+        modalClose.addEventListener('click', closeModal);
+    }
+
+    // Закрытие по клику на фон (на сам модальный оверхлей)
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+
+    // ---------------------- АВТОПОДСТРОЙКА КОНТЕЙНЕРА ПОД ФОТО ----------------------
+    // При загрузке каждого изображения обновляем (на всякий случай)
+    const allImages = document.querySelectorAll('.slide img');
+    allImages.forEach(img => {
+        if (img.complete) {
+            // Уже загружено
+        } else {
+            img.addEventListener('load', () => {
+                // При загрузке изображения контейнер автоматически подстроится
+                setTimeout(() => {
+                    // Ничего не делаем, браузер сам подстроит высоту
+                }, 10);
+            });
+        }
+    });
+
+    // ---------------------- ВЕРТИКАЛЬНОЕ РАСПИСАНИЕ С УТРОМ/ВЕЧЕРОМ ----------------------
+    const служащие = [
+        { 
+            имя: "Ведущий", 
+            тип: "утро-вечер",
+            расписание: { 
+                "Пн_утро": "с", "Пн_вечер": "", 
+                "Вт_утро": "", "Вт_вечер": "с",
+                "Ср_утро": "с", "Ср_вечер": "",
+                "Чт_утро": "", "Чт_вечер": "с",
+                "Пт_утро": "с", "Пт_вечер": "",
+                "Сб_утро": "", "Сб_вечер": "с",
+                "Вс_утро": "с", "Вс_вечер": ""
+            } 
+        },
+        { 
+            имя: "Чайханщик", 
+            тип: "утро-вечер",
+            расписание: { 
+                "Пн_утро": "", "Пн_вечер": "с",
+                "Вт_утро": "с", "Вт_вечер": "",
+                "Ср_утро": "", "Ср_вечер": "с",
+                "Чт_утро": "с", "Чт_вечер": "",
+                "Пт_утро": "", "Пт_вечер": "с",
+                "Сб_утро": "с", "Сб_вечер": "",
+                "Вс_утро": "", "Вс_вечер": "с"
+            } 
+        },
+        { 
+            имя: "Уборщик", 
+            тип: "утро-вечер",
+            расписание: { 
+                "Пн_утро": "с", "Пн_вечер": "",
+                "Вт_утро": "", "Вт_вечер": "с",
+                "Ср_утро": "с", "Ср_вечер": "",
+                "Чт_утро": "", "Чт_вечер": "с",
+                "Пт_утро": "с", "Пт_вечер": "",
+                "Сб_утро": "", "Сб_вечер": "с",
+                "Вс_утро": "с", "Вс_вечер": ""
+            } 
+        },
+        { 
+            имя: "Закупщик", 
+            тип: "обычный",
+            расписание: { "Пн": "с", "Вт": "", "Ср": "", "Чт": "с", "Пт": "с", "Сб": "", "Вс": "" } 
+        },
+        { 
+            имя: "Литком", 
+            тип: "обычный",
+            расписание: { "Пн": "с", "Вт": "с", "Ср": "", "Чт": "", "Пт": "с", "Сб": "", "Вс": "с" } 
+        }
+    ];
+
+    const дниНеделиОбычные = [
+        { короткий: "Пн", полный: "Понедельник" },
+        { короткий: "Вт", полный: "Вторник" },
+        { короткий: "Ср", полный: "Среда" },
+        { короткий: "Чт", полный: "Четверг" },
+        { короткий: "Пт", полный: "Пятница" },
+        { короткий: "Сб", полный: "Суббота" },
+        { короткий: "Вс", полный: "Воскресенье" }
+    ];
+
+    const дниНеделиУтроВечер = [
+        { короткий: "Пн_утро", название: "Пн", подзаголовок: "утро" },
+        { короткий: "Пн_вечер", название: "Пн", подзаголовок: "вечер" },
+        { короткий: "Вт_утро", название: "Вт", подзаголовок: "утро" },
+        { короткий: "Вт_вечер", название: "Вт", подзаголовок: "вечер" },
+        { короткий: "Ср_утро", название: "Ср", подзаголовок: "утро" },
+        { короткий: "Ср_вечер", название: "Ср", подзаголовок: "вечер" },
+        { короткий: "Чт_утро", название: "Чт", подзаголовок: "утро" },
+        { короткий: "Чт_вечер", название: "Чт", подзаголовок: "вечер" },
+        { короткий: "Пт_утро", название: "Пт", подзаголовок: "утро" },
+        { короткий: "Пт_вечер", название: "Пт", подзаголовок: "вечер" },
+        { короткий: "Сб_утро", название: "Сб", подзаголовок: "утро" },
+        { короткий: "Сб_вечер", название: "Сб", подзаголовок: "вечер" },
+        { короткий: "Вс_утро", название: "Вс", подзаголовок: "утро" },
+        { короткий: "Вс_вечер", название: "Вс", подзаголовок: "вечер" }
+    ];
+
+    function создатьВертикальноеРасписание() {
+        const container = document.getElementById("schedule-container");
+        if (!container) return;
+        container.innerHTML = '';
+        
+        const вертикальныйКонтейнер = document.createElement("div");
+        вертикальныйКонтейнер.className = "расписание-вертикальное";
+        
+        служащие.forEach(служащий => {
+            const карточка = document.createElement("div");
+            карточка.className = "служащий-карточка";
+            
+            const имяБлок = document.createElement("div");
+            имяБлок.className = "имя-служащего";
+            имяБлок.innerText = служащий.имя;
+            карточка.appendChild(имяБлок);
+            
+            const дниСетка = document.createElement("div");
+            дниСетка.className = "дни-сетка";
+            
+            if (служащий.тип === "утро-вечер") {
+                дниНеделиУтроВечер.forEach(день => {
+                    const деньЯчейка = document.createElement("div");
+                    деньЯчейка.className = "день-ячейка";
+                    
+                    const названиеДня = document.createElement("span");
+                    названиеДня.className = "название-дня";
+                    названиеДня.innerText = день.название;
+                    
+                    const подзаголовок = document.createElement("span");
+                    подзаголовок.className = "подзаголовок";
+                    подзаголовок.innerText = день.подзаголовок;
+                    
+                    const значениеСлужения = document.createElement("div");
+                    значениеСлужения.className = "значение-служения";
+                    let значение = служащий.расписание[день.короткий] || "";
+                    значениеСлужения.innerText = значение;
+                    
+                    if (значение.toLowerCase().trim() === "с") {
+                        значениеСлужения.classList.add("свободно");
+                        значениеСлужения.title = "✅ Свободное служение! Можно занять.";
+                    }
+                    
+                    значениеСлужения.contentEditable = true;
+                    значениеСлужения.addEventListener("blur", function() {
+                        let новоеЗначение = значениеСлужения.innerText.trim();
+                        служащий.расписание[день.короткий] = новоеЗначение;
+                        
+                        if (новоеЗначение.toLowerCase() === "с") {
+                            значениеСлужения.classList.add("свободно");
+                            значениеСлужения.title = "✅ Свободное служение! Можно занять.";
+                        } else {
+                            значениеСлужения.classList.remove("свободно");
+                            значениеСлужения.title = "";
+                        }
+                        
+                        if (новоеЗначение === "") {
+                            значениеСлужения.innerText = "";
+                        }
+                    });
+                    
+                    деньЯчейка.appendChild(названиеДня);
+                    деньЯчейка.appendChild(подзаголовок);
+                    деньЯчейка.appendChild(значениеСлужения);
+                    дниСетка.appendChild(деньЯчейка);
+                });
+            } else {
+                дниНеделиОбычные.forEach(день => {
+                    const деньЯчейка = document.createElement("div");
+                    деньЯчейка.className = "день-ячейка";
+                    
+                    const названиеДня = document.createElement("span");
+                    названиеДня.className = "название-дня";
+                    названиеДня.innerText = день.короткий;
+                    
+                    const значениеСлужения = document.createElement("div");
+                    значениеСлужения.className = "значение-служения";
+                    let значение = служащий.расписание[день.короткий] || "";
+                    значениеСлужения.innerText = значение;
+                    
+                    if (значение.toLowerCase().trim() === "с") {
+                        значениеСлужения.classList.add("свободно");
+                        значениеСлужения.title = "✅ Свободное служение! Можно занять.";
+                    }
+                    
+                    значениеСлужения.contentEditable = true;
+                    значениеСлужения.addEventListener("blur", function() {
+                        let новоеЗначение = значениеСлужения.innerText.trim();
+                        служащий.расписание[день.короткий] = новоеЗначение;
+                        
+                        if (новоеЗначение.toLowerCase() === "с") {
+                            значениеСлужения.classList.add("свободно");
+                            значениеСлужения.title = "✅ Свободное служение! Можно занять.";
+                        } else {
+                            значениеСлужения.classList.remove("свободно");
+                            значениеСлужения.title = "";
+                        }
+                        
+                        if (новоеЗначение === "") {
+                            значениеСлужения.innerText = "";
+                        }
+                    });
+                    
+                    деньЯчейка.appendChild(названиеДня);
+                    деньЯчейка.appendChild(значениеСлужения);
+                    дниСетка.appendChild(деньЯчейка);
+                });
+            }
+            
+            карточка.appendChild(дниСетка);
+            вертикальныйКонтейнер.appendChild(карточка);
+        });
+        
+        container.appendChild(вертикальныйКонтейнер);
+    }
+
+    // Запускаем создание расписания и видео
+    window.onload = () => {
+        создатьВертикальноеРасписание();
+        const videoElem = document.querySelector('.video');
+        if (videoElem) {
+            videoElem.play().catch(e => console.log("Автовоспроизведение заблокировано"));
+        }
+    };
+</script>
+
+</body>
+</html>

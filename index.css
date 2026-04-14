@@ -1,0 +1,283 @@
+*{
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #435bbb;
+    color: #cfcece;
+   
+    
+}
+img.logo{
+
+    width: 50%;
+    height: 50%;
+}
+
+h1 span {
+    
+    color: rgb(8, 8, 8); /* цвет текста */
+    -webkit-text-stroke: 1px rgb(243, 247, 7); /* контур для WebKit */
+    font-weight: bolder;
+    font-size: 100%;
+}
+video{
+    
+    width: 100%;
+    height: auto;
+}
+
+option,select,label{
+    font-size: 14px;
+}
+
+/* --------------css------------ */
+.slider {
+    position: relative;
+    max-width: 600px; /* максимальная ширина слайдера */
+    margin: auto; /* центрировать слайдер */
+    overflow: hidden; /* скрывать изображения, выходящие за пределы */
+    border: 2px solid #ccc; /* рамка слайдера */
+    margin-bottom: 20px;
+}
+
+.slide {
+    width: 100%; /* ширина слайдов по размеру контейнера */
+}
+
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(133, 113, 248, 0.7); /* полупрозрачный фон */
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 10px;
+    z-index: 2; /* сделать кнопки поверх изображений */
+}
+
+#prev {
+    left: 10px; /* позиция кнопки "предыдущее" */
+    color: #0c0c0c;
+}
+
+#next {
+
+    color: #0c0c0c;
+    right: 10px; /* позиция кнопки "следующее" */
+}
+/* аудио */
+
+.audio-container {
+    margin: 20px 0;
+}
+audio {
+    margin: 10px 0;
+    width: 100%; /* или любое другое значение */
+}
+@media (min-width: 600px) {
+    #seekBar{
+        display: none;
+    }
+    img.logo{
+
+        width: 10%;
+        height: 10%;
+        font-size: 200%;
+    }
+    h1 span {
+    
+       
+        font-size: 200%;
+    }
+    option,select,label{
+        font-size: 20px;
+    }   
+    video{
+    
+    width: 20%;
+    height: auto;
+}
+
+    }
+    @media (max-width: 500px) {
+    
+      select,textarea{
+        width: 100%;
+      }
+    }
+   
+    /* Стили для кнопки */
+    .переключатель-кнопка {
+      display: block; /* Кнопка на новой строке */
+      margin: 20px auto; /* Центрировать кнопку */
+      padding: 10px;
+      background-color: #6d52e6; /* Зеленый цвет для кнопки */
+      color: rgb(0, 0, 0);
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      width: fit-content;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .переключатель-кнопка:hover {
+      background-color: #9b6dcf; /* Цвет при наведении */
+    }
+
+    /* Стили для текста, который будет скрыт/показан */
+    .скрываемый-текст {
+     
+     
+      background-color: #435bbb;
+      display: none; /* Изначально скрыт */
+    }
+
+    /* Стиль для показанного текста (добавляется JavaScript) */
+    .скрываемый-текст.показан {
+        display: block;
+    }
+ 
+
+/* ======================== */
+/* Стили для таблицы */
+.расписание-машин {
+    /* Определяем структуру сетки: 8 столбцов (1 для заголовков + 7 для дней) */
+    grid-template-columns: auto repeat(7, 1fr);
+    /* Определяем структуру сетки: 11 строк (1 для заголовков + 10 для машин) */
+    grid-template-rows: repeat(11, 1fr);
+    gap: 5px;
+    border: 2px solid black;
+    padding: 10px;
+    width: 90%;
+    margin: 20px auto;
+    display: grid; /* Используем grid для создания сетки таблицы */
+  }
+
+  .ячейка {
+    color: #000;
+    border: 1px solid gray;
+    padding: 5px;
+    text-align: center;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    overflow: hidden; /* Скрыть переполняющий текст */
+    text-overflow: ellipsis; /* Добавить многоточие, если текст слишком длинный */
+    box-sizing: border-box; /* Учитывать padding и border в размере элемента */
+  }
+
+  .заголовок {
+    background-color: lightblue;
+    font-weight: bold;
+    color: #000;
+  }
+
+  .вертикальный-заголовок {
+    color: #000;
+      background-color: lightgreen;
+      font-weight: bold;
+      text-align: left; /* Выравнивание текста по левому краю */
+      padding-left: 10px; /* Левый отступ */
+  }
+
+  /* Дополнительные стили для ячеек с данными (опционально) */
+  .ячейка-данных {
+    color: #080808;
+      background-color: white;
+  }
+
+
+/* анимпцииииииииииииииияяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяяя */
+.gradient-text  {
+    background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: color-shift 5s infinite linear; /* Изменяем название анимации и время */
+  }
+  a.strelka{
+    text-decoration: none;
+ display: flex;
+ 
+ font-size: 30px;
+ font-weight: bold;
+ color: #fbff09;
+
+  }
+
+  @keyframes color-shift {
+    0% {
+      background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    14.28% {
+      background: linear-gradient(to right, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    28.56% {
+      background: linear-gradient(to right, #ffff8f, #68e668, #7c7ceb, #a05cd1, #4a0069, #ff0000, #ff7f00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    42.84% {
+      background: linear-gradient(to right, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    57.12% {
+      background: linear-gradient(to right, #0000ff, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    71.4% {
+      background: linear-gradient(to right, #4b0082, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    85.68% {
+      background: linear-gradient(to right, #9400d3, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    100% {
+      background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+}
+  
+
+/* АНимация        кнопкииииииииииииииииииииииии */
+
+/* Стиль кнопки */
+.переключатель-кнопка {
+  padding: 15px 30px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #2b2b2b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  /* Создаем эффект выпуклости с помощью box-shadow */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3),
+              inset 0 2px 4px rgba(255,255,255,0.2),
+              inset 0 -2px 4px rgba(0,0,0,0.2);
+  /* Для плавных изменений */
+  transition: all 0.2s ease;
+}
+
+/* Эффект "нажатия" - кнопка "прогибается" */
+.переключатель-кнопка:active {
+  /* Уменьшаем тень и добавляем эффект "вдавливания" */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3),
+              inset 0 -2px 4px rgba(255,255,255,0.2),
+              inset 0 1px 2px rgba(0,0,0,0.2);
+  /* Немного уменьшаем размер для эффекта нажатия */
+  transform: translateY(2px);
+}
