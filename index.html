@@ -18,6 +18,16 @@
             min-height: 100vh;
             padding: 12px;
             animation: fadeIn 0.8s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Центрирующий контейнер для всего контента */
+        .main-wrapper {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
         }
 
         @keyframes fadeIn {
@@ -39,9 +49,17 @@
             padding: 20px;
             margin: 16px auto;
             max-width: 1200px;
+            width: 100%;
             box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: slideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        /* На больших экранах ограничиваем ширину боксов */
+        @media (min-width: 1300px) {
+            .box, .box1 {
+                max-width: 1000px;
+            }
         }
 
         .box:hover, .box1:hover {
@@ -272,7 +290,7 @@
 
         /* ---------- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО ---------- */
         .slider-container {
-            margin: 20px 0 30px;
+            margin: 20px auto 30px;
             position: relative;
             border-radius: 28px;
             overflow: hidden;
@@ -280,6 +298,13 @@
             background: #1a2a3a;
             max-width: 100%;
             width: 100%;
+        }
+
+        /* На больших экранах ограничиваем ширину слайдера */
+        @media (min-width: 1300px) {
+            .slider-container {
+                max-width: 800px;
+            }
         }
 
         .slider-wrapper {
@@ -430,6 +455,15 @@
         /* Видео блок */
         .video-section {
             margin: 20px 0;
+        }
+
+        /* На больших экранах ограничиваем ширину видео */
+        @media (min-width: 1300px) {
+            .video-section {
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         }
 
         .video-title {
@@ -642,77 +676,78 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
+<div class="main-wrapper">
+    <div class="box">
 
-<div class="box">
+        <div style="text-align:center"><img class="logo" src="Снимок.jpg" alt="Логотип Чебурашка"></div>
+        <h1>
+            <span>Ч</span><span>е</span><span>б</span><span>у</span><span>р</span><span>а</span><span>ш</span><span>к</span><span>а</span>
+        </h1>
+        <h1 class="gradient-text">Первое собрание и открытие было на Монастырской 96,<br> 8 июля 2014 года.</h1>
 
-    <div style="text-align:center"><img class="logo" src="Снимок.jpg" alt="Логотип Чебурашка"></div>
-    <h1>
-        <span>Ч</span><span>е</span><span>б</span><span>у</span><span>р</span><span>а</span><span>ш</span><span>к</span><span>а</span>
-    </h1>
-    <h1 class="gradient-text">Первое собрание и открытие было на Монастырской 96,<br> 8 июля 2014 года.</h1>
-
-    <!-- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО -->
-    <div class="slider-container" id="sliderContainer">
-        <div class="slider-wrapper">
-            <div class="slides" id="slides">
-                <div class="slide">
-                    <img src="Av41eZpQ86FLXqWNyw2C7tZvpUZ7PS5bgsW89vLE1PiOpEJ9iPFXaPPOAgd6HZVDErRbfuw6x1QojCTuAb89xoLW.jpg" alt="Чебурашка 1">
+        <!-- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО -->
+        <div class="slider-container" id="sliderContainer">
+            <div class="slider-wrapper">
+                <div class="slides" id="slides">
+                    <div class="slide">
+                        <img src="Av41eZpQ86FLXqWNyw2C7tZvpUZ7PS5bgsW89vLE1PiOpEJ9iPFXaPPOAgd6HZVDErRbfuw6x1QojCTuAb89xoLW.jpg" alt="Чебурашка 1">
+                    </div>
+                    <div class="slide">
+                        <img src="vvRcOSlic45vRcXAINFTrRphNgyGPyIL8XpNbjWId3-q0G9gY5YQH7v03uGB2c1a9FKg0PKfn2aNd0p7HOalAYy_.jpg" alt="Чебурашка 2">
+                    </div>
+                    <div class="slide">
+                        <img src="литвечер.jpg" alt="Чебурашка 3">
+                    </div>
                 </div>
-                <div class="slide">
-                    <img src="vvRcOSlic45vRcXAINFTrRphNgyGPyIL8XpNbjWId3-q0G9gY5YQH7v03uGB2c1a9FKg0PKfn2aNd0p7HOalAYy_.jpg" alt="Чебурашка 2">
-                </div>
-                <div class="slide">
-                    <img src="литвечер.jpg" alt="Чебурашка 3">
-                </div>
+                <button class="slider-btn prev" id="prevBtn">❮</button>
+                <button class="slider-btn next" id="nextBtn">❯</button>
             </div>
-            <button class="slider-btn prev" id="prevBtn">❮</button>
-            <button class="slider-btn next" id="nextBtn">❯</button>
+            <div class="slider-dots" id="dots"></div>
         </div>
-        <div class="slider-dots" id="dots"></div>
+
+        <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО -->
+        <div id="imageModal" class="modal">
+            <span class="modal-close">&times;</span>
+            <img id="modalImage" src="" alt="Увеличенное фото">
+        </div>
+
+        <!-- ВИДЕО БЛОК (отдельно, под слайдером) -->
+        <div class="video-section">
+            <div class="video-title">🎬 видео как дойти до чебурашки</div>
+            <video class="video" muted src="video_2025-05-03_02-16-32.mp4" autoplay loop="playsinline"></video>
+        </div>
+
+        <button class="переключатель-кнопка" id="кнопка-переключения">📋 Доступные вакантные служения</button>
+
+        <div class="скрываемый-текст" id="текст-для-переключения">
+            <p style="text-align:center; font-size: clamp(12px, 3.5vw, 1.2rem); margin-bottom: 16px;">
+                 <strong style="color:#6fef9f;">Доступные служения</strong>  <br>
+          
+            </p>
+            <div id="schedule-container"></div>
+            <br>
+            <label for="mySelect">📅 Собрания проходят:</label>
+            <select id="mySelect" name="mySelect">
+                <option>Понедельник с 18:30 до 20:00</option>
+                <option>Вторник с 18:30 до 20:00</option>
+                <option>Среда с 18:30 до 20:00</option>
+                <option>Четверг с 18:30 до 20:00</option>
+                <option>Пятница с 18:30 до 20:00</option>
+                <option>Суббота с 18:30 до 20:00</option>
+                <option>Воскресенье утро c 11:00 до 12:00</option>
+                <option>Воскресенье вечер с 18:30 до 19:30</option>
+            </select>
+        </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО -->
-    <div id="imageModal" class="modal">
-        <span class="modal-close">&times;</span>
-        <img id="modalImage" src="" alt="Увеличенное фото">
+    <div class="box1">
+        <h2>✉️ Отправить анонимный вопрос на собрание гр.Чебурашка</h2>
+        <form id="telegramForm">
+            <label for="message">Сообщение:</label><br>
+            <textarea id="message" name="message" rows="4" required placeholder="Ваш вопрос будет отправлен анонимно..."></textarea><br><br>
+            <button type="submit">🚀 Отправить анонимно</button>
+        </form>
     </div>
-
-    <!-- ВИДЕО БЛОК (отдельно, под слайдером) -->
-    <div class="video-section">
-        <div class="video-title">🎬 Наше видео</div>
-        <video class="video" muted src="video_2025-05-03_02-16-32.mp4" autoplay loop="playsinline"></video>
-    </div>
-
-    <button class="переключатель-кнопка" id="кнопка-переключения">📋 Доступные вакантные служения</button>
-
-    <div class="скрываемый-текст" id="текст-для-переключения">
-        <p style="text-align:center; font-size: clamp(12px, 3.5vw, 1.2rem); margin-bottom: 16px;">
-            🟢 <strong style="color:#6fef9f;">Доступные служения</strong> — ячейки с буквой <strong style="background:#1e7a4a; padding:3px 8px; border-radius:20px; font-size:13px;">с</strong> отмечены зелёным ✨<br>
-            (свободные вакантные служения — нажмите на ячейку, чтобы редактировать)
-        </p>
-        <div id="schedule-container"></div>
-        <br>
-        <label for="mySelect">📅 Собрания проходят:</label>
-        <select id="mySelect" name="mySelect">
-            <option>Понедельник с 18:30 до 20:00</option>
-            <option>Вторник с 18:30 до 20:00</option>
-            <option>Среда с 18:30 до 20:00</option>
-            <option>Четверг с 18:30 до 20:00</option>
-            <option>Пятница с 18:30 до 20:00</option>
-            <option>Суббота с 18:30 до 20:00</option>
-            <option>Воскресенье утро c 10:30 до 12:00</option>
-            <option>Воскресенье вечер с 18:30 до 20:00</option>
-        </select>
-    </div>
-</div>
-
-<div class="box1">
-    <h2>✉️ Отправить анонимный вопрос на собрание гр.Чебурашка</h2>
-    <form id="telegramForm">
-        <label for="message">Сообщение:</label><br>
-        <textarea id="message" name="message" rows="4" required placeholder="Ваш вопрос будет отправлен анонимно..."></textarea><br><br>
-        <button type="submit">🚀 Отправить анонимно</button>
-    </form>
 </div>
 
 <script>
@@ -841,21 +876,21 @@
     function openModal(imageSrc) {
         modal.style.display = 'flex';
         modalImg.src = imageSrc;
-        document.body.style.overflow = 'hidden'; // Блокируем прокрутку страницы
+        document.body.style.overflow = 'hidden';
     }
 
     // Функция закрытия модального окна
     function closeModal() {
         modal.style.display = 'none';
         modalImg.src = '';
-        document.body.style.overflow = ''; // Восстанавливаем прокрутку
+        document.body.style.overflow = '';
     }
 
     // Добавляем обработчики на все изображения в слайдере
     const slideImages = document.querySelectorAll('.slide img');
     slideImages.forEach(img => {
         img.addEventListener('click', (e) => {
-            e.stopPropagation(); // Останавливаем всплытие, чтобы не конфликтовать с другими событиями
+            e.stopPropagation();
             openModal(img.src);
         });
     });
@@ -865,7 +900,7 @@
         modalClose.addEventListener('click', closeModal);
     }
 
-    // Закрытие по клику на фон (на сам модальный оверхлей)
+    // Закрытие по клику на фон
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
             closeModal();
@@ -876,22 +911,6 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal.style.display === 'flex') {
             closeModal();
-        }
-    });
-
-    // ---------------------- АВТОПОДСТРОЙКА КОНТЕЙНЕРА ПОД ФОТО ----------------------
-    // При загрузке каждого изображения обновляем (на всякий случай)
-    const allImages = document.querySelectorAll('.slide img');
-    allImages.forEach(img => {
-        if (img.complete) {
-            // Уже загружено
-        } else {
-            img.addEventListener('load', () => {
-                // При загрузке изображения контейнер автоматически подстроится
-                setTimeout(() => {
-                    // Ничего не делаем, браузер сам подстроит высоту
-                }, 10);
-            });
         }
     });
 
