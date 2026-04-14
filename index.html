@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Чебурашка | Анимированное расписание</title>
+    <title>Чебурашка</title>
     <style>
         /* ---------- ГЛОБАЛЬНЫЕ СТИЛИ И АНИМАЦИИ ---------- */
         * {
@@ -23,7 +23,6 @@
             align-items: center;
         }
 
-        /* Центрирующий контейнер для всего контента */
         .main-wrapper {
             max-width: 1400px;
             width: 100%;
@@ -31,17 +30,10 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Анимированный градиентный фон для контейнеров */
         .box, .box1 {
             background: rgba(15, 25, 45, 0.75);
             backdrop-filter: blur(12px);
@@ -55,11 +47,8 @@
             animation: slideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
-        /* На больших экранах ограничиваем ширину боксов */
         @media (min-width: 1300px) {
-            .box, .box1 {
-                max-width: 1000px;
-            }
+            .box, .box1 { max-width: 1000px; }
         }
 
         .box:hover, .box1:hover {
@@ -68,41 +57,10 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(60px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Стрелка назад */
-        .strelka {
-            font-size: 40px;
-            text-decoration: none;
-            color: #ffd966;
-            background: rgba(0, 0, 0, 0.4);
-            width: 56px;
-            height: 56px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            margin-bottom: 16px;
-            backdrop-filter: blur(8px);
-        }
-
-        .strelka:hover {
-            background: #ffd966;
-            color: #1a2a3a;
-            transform: scale(1.1) rotate(-5deg);
-            box-shadow: 0 0 20px rgba(255, 217, 102, 0.6);
-        }
-
-        /* Логотип с анимацией */
         .logo {
             width: 90px;
             border-radius: 50%;
@@ -122,7 +80,6 @@
             filter: drop-shadow(0 0 15px #ffd966);
         }
 
-        /* Заголовок с анимацией букв */
         h1 {
             font-size: clamp(32px, 8vw, 64px);
             font-weight: 800;
@@ -141,10 +98,7 @@
         }
 
         @keyframes bounceLetter {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 span:nth-child(1) { animation-delay: 0.05s; }
@@ -157,7 +111,6 @@
         h1 span:nth-child(8) { animation-delay: 0.4s; }
         h1 span:nth-child(9) { animation-delay: 0.45s; }
 
-        /* Градиентный текст */
         .gradient-text {
             background: linear-gradient(135deg, #fff8e7, #ffd966, #ffb347);
             -webkit-background-clip: text;
@@ -174,7 +127,6 @@
             100% { background-position: 200% center; }
         }
 
-        /* Кнопка-переключатель с эффектами */
         .переключатель-кнопка {
             background: linear-gradient(45deg, #ffb347, #ff8c00);
             border: none;
@@ -188,8 +140,6 @@
             display: block;
             transition: all 0.25s ease;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            letter-spacing: 1px;
-            backdrop-filter: blur(4px);
             width: fit-content;
             min-width: 200px;
         }
@@ -200,12 +150,8 @@
             background: linear-gradient(45deg, #ffc107, #ff7b00);
         }
 
-        .переключатель-кнопка.pressed {
-            transform: scale(0.96);
-            transition: 0.05s linear;
-        }
+        .переключатель-кнопка.pressed { transform: scale(0.96); transition: 0.05s linear; }
 
-        /* Скрываемый текст с плавным появлением */
         .скрываемый-текст {
             max-height: 0;
             opacity: 0;
@@ -223,7 +169,6 @@
             margin-top: 16px;
         }
 
-        /* Стилизованный select */
         select {
             background: #1e2a3a;
             color: #ffefc0;
@@ -233,17 +178,14 @@
             font-size: 14px;
             margin: 12px 0;
             cursor: pointer;
-            transition: 0.2s;
             width: 100%;
         }
 
         select:hover {
             background: #2a3a4a;
             border-color: #ffaa33;
-            box-shadow: 0 0 12px rgba(255, 217, 102, 0.4);
         }
 
-        /* Форма анонимных вопросов */
         .box1 h2 {
             color: #ffdfa5;
             margin-bottom: 16px;
@@ -265,7 +207,6 @@
             outline: none;
             border-color: #ffd966;
             box-shadow: 0 0 18px rgba(255, 217, 102, 0.3);
-            transform: scale(1.01);
         }
 
         button[type="submit"] {
@@ -285,10 +226,9 @@
         button[type="submit"]:hover {
             background: #ffaa55;
             transform: scale(1.02);
-            box-shadow: 0 5px 18px #ff8c4280;
         }
 
-        /* ---------- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО ---------- */
+        /* Слайдер */
         .slider-container {
             margin: 20px auto 30px;
             position: relative;
@@ -300,11 +240,8 @@
             width: 100%;
         }
 
-        /* На больших экранах ограничиваем ширину слайдера */
         @media (min-width: 1300px) {
-            .slider-container {
-                max-width: 800px;
-            }
+            .slider-container { max-width: 800px; }
         }
 
         .slider-wrapper {
@@ -332,9 +269,7 @@
             transition: transform 0.2s ease;
         }
 
-        .slide img:hover {
-            transform: scale(1.02);
-        }
+        .slide img:hover { transform: scale(1.02); }
 
         .slider-btn {
             position: absolute;
@@ -348,10 +283,8 @@
             border-radius: 50%;
             cursor: pointer;
             font-size: 24px;
-            font-weight: bold;
             transition: all 0.3s ease;
             z-index: 10;
-            backdrop-filter: blur(4px);
         }
 
         .slider-btn:hover {
@@ -360,13 +293,8 @@
             transform: translateY(-50%) scale(1.1);
         }
 
-        .slider-btn.prev {
-            left: 15px;
-        }
-
-        .slider-btn.next {
-            right: 15px;
-        }
+        .slider-btn.prev { left: 15px; }
+        .slider-btn.next { right: 15px; }
 
         .slider-dots {
             display: flex;
@@ -391,8 +319,8 @@
             border-radius: 10px;
         }
 
-        /* ---------- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО ---------- */
-        .modal {
+        /* Модальное окно для фото */
+        .modal-photo {
             display: none;
             position: fixed;
             top: 0;
@@ -400,7 +328,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
+            z-index: 2000;
             cursor: pointer;
             justify-content: center;
             align-items: center;
@@ -408,15 +336,11 @@
         }
 
         @keyframes fadeInModal {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .modal img {
+        .modal-photo img {
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
@@ -426,14 +350,8 @@
         }
 
         @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
         .modal-close {
@@ -444,7 +362,7 @@
             color: #ffd966;
             cursor: pointer;
             transition: 0.2s;
-            z-index: 1001;
+            z-index: 2001;
         }
 
         .modal-close:hover {
@@ -452,12 +370,72 @@
             color: #ffaa33;
         }
 
-        /* Видео блок */
+        /* Модальное окно для описания служения */
+        .modal-description {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        .modal-description-content {
+            background: linear-gradient(135deg, #1e2a3a, #0f1a24);
+            border-radius: 32px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80%;
+            overflow-y: auto;
+            border: 2px solid #ffd966;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
+        }
+
+        .modal-description-content h3 {
+            color: #ffd966;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-description-content p {
+            color: #f0f0f0;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-description-close {
+            background: #ff8c42;
+            border: none;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: 0.2s;
+        }
+
+        .modal-description-close:hover {
+            background: #ffaa55;
+            transform: scale(1.02);
+        }
+
+        /* Видео */
         .video-section {
             margin: 20px 0;
         }
 
-        /* На больших экранах ограничиваем ширину видео */
         @media (min-width: 1300px) {
             .video-section {
                 max-width: 800px;
@@ -476,7 +454,6 @@
 
         .video {
             width: 100%;
-            max-width: 100%;
             border-radius: 24px;
             display: block;
             box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
@@ -487,10 +464,9 @@
         .video:hover {
             transform: scale(1.01);
             border-color: #ffd966;
-            box-shadow: 0 0 30px rgba(255, 217, 102, 0.3);
         }
 
-        /* ---------- ВЕРТИКАЛЬНАЯ ТАБЛИЦА (БЕЗ ГОРИЗОНТАЛЬНОЙ ПРОКРУТКИ) ---------- */
+        /* Расписание */
         .расписание-вертикальное {
             display: flex;
             flex-direction: column;
@@ -498,7 +474,6 @@
             margin: 20px 0;
         }
 
-        /* Карточка служащего */
         .служащий-карточка {
             background: rgba(20, 30, 45, 0.8);
             backdrop-filter: blur(4px);
@@ -511,10 +486,8 @@
         .служащий-карточка:hover {
             transform: translateX(5px);
             border-color: #ffd966;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        /* Имя служащего */
         .имя-служащего {
             background: linear-gradient(135deg, #ffb34730, #ff8c0030);
             padding: 14px 18px;
@@ -532,7 +505,6 @@
             font-size: 20px;
         }
 
-        /* Сетка дней для каждого служащего */
         .дни-сетка {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -540,13 +512,11 @@
             padding: 14px;
         }
 
-        /* Ячейка дня */
         .день-ячейка {
             background: rgba(30, 40, 55, 0.6);
             border-radius: 16px;
             padding: 10px 6px;
             text-align: center;
-            transition: all 0.2s ease;
         }
 
         .название-дня {
@@ -576,7 +546,6 @@
             opacity: 0.5;
         }
 
-        /* Зелёная подсветка для "с" */
         .значение-служения.свободно {
             background: linear-gradient(145deg, #1e7a4a, #0f5e38);
             color: white;
@@ -586,15 +555,9 @@
         }
 
         @keyframes pulseGreen {
-            0% {
-                box-shadow: 0 0 0 0 rgba(70, 200, 120, 0.5);
-            }
-            70% {
-                box-shadow: 0 0 0 8px rgba(70, 200, 120, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(70, 200, 120, 0);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(70, 200, 120, 0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(70, 200, 120, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(70, 200, 120, 0); }
         }
 
         .значение-служения.свободно:hover {
@@ -607,7 +570,6 @@
             transform: scale(1.02);
         }
 
-        /* Стиль для подзаголовка (утро/вечер) */
         .подзаголовок {
             font-size: 10px;
             color: #ffaa66;
@@ -615,59 +577,39 @@
             margin-top: 4px;
         }
 
-        /* Для очень маленьких экранов */
+        .кнопка-подробнее {
+            background: rgba(255, 217, 102, 0.2);
+            border: 1px solid #ffd966;
+            padding: 8px 16px;
+            margin: 12px 14px 14px auto;
+            border-radius: 30px;
+            color: #ffd966;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: fit-content;
+        }
+
+        .кнопка-подробнее:hover {
+            background: #ffd966;
+            color: #1a2a3a;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255, 217, 102, 0.5);
+        }
+
         @media (max-width: 550px) {
-            .дни-сетка {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            
-            body {
-                padding: 8px;
-            }
-            
-            .box, .box1 {
-                padding: 16px;
-                border-radius: 24px;
-            }
-            
-            .имя-служащего {
-                padding: 10px 14px;
-                font-size: 16px;
-            }
-            
-            .день-ячейка {
-                padding: 8px 4px;
-            }
-            
-            .название-дня {
-                font-size: 10px;
-            }
-            
-            .значение-служения {
-                font-size: 12px;
-                padding: 4px;
-            }
-
-            .slider-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
-            }
+            .дни-сетка { grid-template-columns: repeat(2, 1fr); }
+            body { padding: 8px; }
+            .box, .box1 { padding: 16px; }
+            .slider-btn { width: 35px; height: 35px; font-size: 18px; }
         }
 
-        /* Для средних экранов - 3 колонки */
         @media (min-width: 551px) and (max-width: 800px) {
-            .дни-сетка {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .дни-сетка { grid-template-columns: repeat(3, 1fr); }
         }
 
-        /* Стилизация редактируемых полей */
-        [contenteditable="true"] {
-            outline: none;
-        }
-
+        [contenteditable="true"] { outline: none; }
         [contenteditable="true"]:focus {
             background: #2a4a6a;
             box-shadow: 0 0 0 2px #ffd966;
@@ -678,26 +620,19 @@
 <body>
 <div class="main-wrapper">
     <div class="box">
-
         <div style="text-align:center"><img class="logo" src="Снимок.jpg" alt="Логотип Чебурашка"></div>
         <h1>
             <span>Ч</span><span>е</span><span>б</span><span>у</span><span>р</span><span>а</span><span>ш</span><span>к</span><span>а</span>
         </h1>
         <h1 class="gradient-text">Первое собрание и открытие было на Монастырской 96,<br> 8 июля 2014 года.</h1>
 
-        <!-- СЛАЙДЕР - АВТОПОДСТРОЙКА ПОД ФОТО -->
-        <div class="slider-container" id="sliderContainer">
+        <!-- СЛАЙДЕР -->
+        <div class="slider-container">
             <div class="slider-wrapper">
                 <div class="slides" id="slides">
-                    <div class="slide">
-                        <img src="Av41eZpQ86FLXqWNyw2C7tZvpUZ7PS5bgsW89vLE1PiOpEJ9iPFXaPPOAgd6HZVDErRbfuw6x1QojCTuAb89xoLW.jpg" alt="Чебурашка 1">
-                    </div>
-                    <div class="slide">
-                        <img src="vvRcOSlic45vRcXAINFTrRphNgyGPyIL8XpNbjWId3-q0G9gY5YQH7v03uGB2c1a9FKg0PKfn2aNd0p7HOalAYy_.jpg" alt="Чебурашка 2">
-                    </div>
-                    <div class="slide">
-                        <img src="литвечер.jpg" alt="Чебурашка 3">
-                    </div>
+                    <div class="slide"><img src="Av41eZpQ86FLXqWNyw2C7tZvpUZ7PS5bgsW89vLE1PiOpEJ9iPFXaPPOAgd6HZVDErRbfuw6x1QojCTuAb89xoLW.jpg" alt="Чебурашка 1"></div>
+                    <div class="slide"><img src="vvRcOSlic45vRcXAINFTrRphNgyGPyIL8XpNbjWId3-q0G9gY5YQH7v03uGB2c1a9FKg0PKfn2aNd0p7HOalAYy_.jpg" alt="Чебурашка 2"></div>
+                    <div class="slide"><img src="литвечер.jpg" alt="Чебурашка 3"></div>
                 </div>
                 <button class="slider-btn prev" id="prevBtn">❮</button>
                 <button class="slider-btn next" id="nextBtn">❯</button>
@@ -705,24 +640,23 @@
             <div class="slider-dots" id="dots"></div>
         </div>
 
-        <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО -->
-        <div id="imageModal" class="modal">
-            <span class="modal-close">&times;</span>
+        <!-- Модальное окно для фото -->
+        <div id="photoModal" class="modal-photo">
+            <span class="modal-close" id="photoModalClose">&times;</span>
             <img id="modalImage" src="" alt="Увеличенное фото">
         </div>
 
-        <!-- ВИДЕО БЛОК (отдельно, под слайдером) -->
+        <!-- ВИДЕО -->
         <div class="video-section">
-            <div class="video-title">🎬 видео как дойти до чебурашки</div>
-            <video class="video" muted src="video_2025-05-03_02-16-32.mp4" autoplay loop="playsinline"></video>
+            <div class="video-title">🎬  видео как добраться до чебурашки</div>
+            <video class="video" muted src="video_2025-05-03_02-16-32.mp4" autoplay loop playsinline></video>
         </div>
 
         <button class="переключатель-кнопка" id="кнопка-переключения">📋 Доступные вакантные служения</button>
 
         <div class="скрываемый-текст" id="текст-для-переключения">
             <p style="text-align:center; font-size: clamp(12px, 3.5vw, 1.2rem); margin-bottom: 16px;">
-                 <strong style="color:#6fef9f;">Доступные служения</strong>  <br>
-          
+                🟢 <strong style="color:#6fef9f;">Доступные служения</strong> 
             </p>
             <div id="schedule-container"></div>
             <br>
@@ -750,31 +684,32 @@
     </div>
 </div>
 
+<!-- Модальное окно для описания служения -->
+<div id="descriptionModal" class="modal-description">
+    <div class="modal-description-content">
+        <h3 id="modalServiceTitle"></h3>
+        <p id="modalServiceDescription"></p>
+        <button class="modal-description-close" id="descriptionModalClose">Закрыть</button>
+    </div>
+</div>
+
 <script>
-    // ---------------------- АНИМАЦИЯ КНОПКИ СКРЫТИЯ/ПОКАЗА ----------------------
+    // ---------------------- КНОПКА СКРЫТИЯ/ПОКАЗА ----------------------
     const кнопкаПереключения = document.getElementById('кнопка-переключения');
     const текстДляПереключения = document.getElementById('текст-для-переключения');
 
     кнопкаПереключения.addEventListener('click', function() {
         текстДляПереключения.classList.toggle('показан');
-        if (текстДляПереключения.classList.contains('показан')) {
-            кнопкаПереключения.textContent = '🔒 Скрыть вакантные служения';
-        } else {
-            кнопкаПереключения.textContent = '📋 Доступные вакантные служения';
-        }
+        кнопкаПереключения.textContent = текстДляПереключения.classList.contains('показан') 
+            ? '🔒 Скрыть вакантные служения' 
+            : '📋 Доступные вакантные служения';
     });
 
-    кнопкаПереключения.addEventListener('mousedown', () => {
-        кнопкаПереключения.classList.add('pressed');
-    });
-    кнопкаПереключения.addEventListener('mouseup', () => {
-        кнопкаПереключения.classList.remove('pressed');
-    });
-    кнопкаПереключения.addEventListener('mouseleave', () => {
-        кнопкаПереключения.classList.remove('pressed');
-    });
+    кнопкаПереключения.addEventListener('mousedown', () => кнопкаПереключения.classList.add('pressed'));
+    кнопкаПереключения.addEventListener('mouseup', () => кнопкаПереключения.classList.remove('pressed'));
+    кнопкаПереключения.addEventListener('mouseleave', () => кнопкаПереключения.classList.remove('pressed'));
 
-    // ---------------------- ТЕЛЕГРАМ ОТПРАВКА ----------------------
+    // ---------------------- ТЕЛЕГРАМ ----------------------
     const TELEGRAM_TOKEN = '7831903358:AAHIkRNmstPV5QYoRC5GYqGiuGppTlLiotk';
     const CHAT_ID = '-1002657190873';
 
@@ -785,19 +720,18 @@
             alert('Пожалуйста, введите сообщение.');
             return;
         }
-        const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-        axios.post(url, { chat_id: CHAT_ID, text: message })
+        axios.post(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, { chat_id: CHAT_ID, text: message })
             .then(() => {
                 alert('✅ Сообщение успешно отправлено!');
                 document.getElementById('telegramForm').reset();
             })
             .catch((error) => {
-                alert('❌ Ошибка при отправке. Проверьте консоль.');
+                alert('❌ Ошибка при отправке.');
                 console.error(error);
             });
     });
 
-    // ---------------------- СЛАЙДЕР (ИСПРАВЛЕННЫЙ) ----------------------
+    // ---------------------- СЛАЙДЕР ----------------------
     let currentIndex = 0;
     const slides = document.getElementById('slides');
     const slidesCount = document.querySelectorAll('.slide').length;
@@ -805,7 +739,6 @@
     const nextBtn = document.getElementById('nextBtn');
     const dotsContainer = document.getElementById('dots');
 
-    // Создаем точки навигации
     function createDots() {
         dotsContainer.innerHTML = '';
         for (let i = 0; i < slidesCount; i++) {
@@ -817,182 +750,111 @@
         }
     }
 
-    // Обновляем активную точку
     function updateDots() {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, index) => {
-            if (index === currentIndex) {
-                dot.classList.add('active');
-            } else {
-                dot.classList.remove('active');
-            }
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
         });
     }
 
-    // Переход к слайду
     function goToSlide(index) {
-        if (index < 0) index = 0;
-        if (index >= slidesCount) index = slidesCount - 1;
-        currentIndex = index;
-        const offset = -currentIndex * 100;
-        slides.style.transform = `translateX(${offset}%)`;
+        currentIndex = Math.max(0, Math.min(index, slidesCount - 1));
+        slides.style.transform = `translateX(${-currentIndex * 100}%)`;
         updateDots();
     }
 
-    // Следующий слайд
-    function nextSlide() {
-        if (currentIndex < slidesCount - 1) {
-            goToSlide(currentIndex + 1);
-        } else {
-            goToSlide(0);
-        }
-    }
+    function nextSlide() { goToSlide(currentIndex + 1 >= slidesCount ? 0 : currentIndex + 1); }
+    function prevSlide() { goToSlide(currentIndex - 1 < 0 ? slidesCount - 1 : currentIndex - 1); }
 
-    // Предыдущий слайд
-    function prevSlide() {
-        if (currentIndex > 0) {
-            goToSlide(currentIndex - 1);
-        } else {
-            goToSlide(slidesCount - 1);
-        }
-    }
-
-    // Добавляем обработчики
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
-    }
-
-    // Инициализация слайдера
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
     createDots();
     goToSlide(0);
 
-    // ---------------------- УВЕЛИЧЕНИЕ ФОТО ПРИ НАЖАТИИ ----------------------
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalClose = document.querySelector('.modal-close');
+    // ---------------------- МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО (РАБОТАЕТ КОРРЕКТНО) ----------------------
+    const photoModal = document.getElementById('photoModal');
+    const modalImage = document.getElementById('modalImage');
+    const photoModalClose = document.getElementById('photoModalClose');
 
-    // Функция открытия модального окна
-    function openModal(imageSrc) {
-        modal.style.display = 'flex';
-        modalImg.src = imageSrc;
+    function openPhotoModal(src) {
+        modalImage.src = src;
+        photoModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
 
-    // Функция закрытия модального окна
-    function closeModal() {
-        modal.style.display = 'none';
-        modalImg.src = '';
+    function closePhotoModal() {
+        photoModal.style.display = 'none';
+        modalImage.src = '';
         document.body.style.overflow = '';
     }
 
-    // Добавляем обработчики на все изображения в слайдере
-    const slideImages = document.querySelectorAll('.slide img');
-    slideImages.forEach(img => {
+    // Клик по фото в слайдере
+    document.querySelectorAll('.slide img').forEach(img => {
         img.addEventListener('click', (e) => {
             e.stopPropagation();
-            openModal(img.src);
+            openPhotoModal(img.src);
         });
     });
 
-    // Закрытие по клику на крестик
-    if (modalClose) {
-        modalClose.addEventListener('click', closeModal);
-    }
+    // Закрытие по крестику или по фону
+    photoModalClose.addEventListener('click', closePhotoModal);
+    photoModal.addEventListener('click', (e) => { if (e.target === photoModal) closePhotoModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && photoModal.style.display === 'flex') closePhotoModal(); });
 
-    // Закрытие по клику на фон
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
+    // ---------------------- ОПИСАНИЯ СЛУЖЕНИЙ ----------------------
+    const descriptions = {
+        "Ведущий": "Ведущий отвечает за проведение собрания: открывает встречу, следит за регламентом, предоставляет слово выступающим, поддерживает порядок и создаёт доброжелательную атмосферу. Требуются навыки публичных выступлений и организаторские способности.",
+        "Чайханщик": "Чайханщик заботится о чаепитии после собрания: готовит чай, печенье, сладости, накрывает стол и создаёт уютную обстановку для общения. Важно внимание к деталям и гостеприимство.",
+        "Уборщик": "Уборщик поддерживает чистоту в помещении до и после собрания: протирает пыль, моет полы, приводит в порядок мебель. Ответственность и аккуратность — главные качества.",
+        "Закупщик": "Закупщик отвечает за приобретение продуктов и материалов для собраний: чай, сахар, печенье, бумажные стаканчики и другие необходимые мелочи. Требуется умение планировать бюджет и вовремя делать закупки.",
+        "Литком": "Литком (литературный комитет) отвечает за подбор литературы, статей и материалов для духовного развития группы. Подготавливает темы для обсуждения, распечатывает раздаточные материалы и ведёт библиотеку собрания."
+    };
 
-    // Закрытие по клавише Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'flex') {
-            closeModal();
-        }
-    });
-
-    // ---------------------- ВЕРТИКАЛЬНОЕ РАСПИСАНИЕ С УТРОМ/ВЕЧЕРОМ ----------------------
+    // ---------------------- ВЕРТИКАЛЬНОЕ РАСПИСАНИЕ ----------------------
     const служащие = [
-        { 
-            имя: "Ведущий", 
-            тип: "утро-вечер",
-            расписание: { 
-                "Пн_утро": "с", "Пн_вечер": "", 
-                "Вт_утро": "", "Вт_вечер": "с",
-                "Ср_утро": "с", "Ср_вечер": "",
-                "Чт_утро": "", "Чт_вечер": "с",
-                "Пт_утро": "с", "Пт_вечер": "",
-                "Сб_утро": "", "Сб_вечер": "с",
-                "Вс_утро": "с", "Вс_вечер": ""
-            } 
-        },
-        { 
-            имя: "Чайханщик", 
-            тип: "утро-вечер",
-            расписание: { 
-                "Пн_утро": "", "Пн_вечер": "с",
-                "Вт_утро": "с", "Вт_вечер": "",
-                "Ср_утро": "", "Ср_вечер": "с",
-                "Чт_утро": "с", "Чт_вечер": "",
-                "Пт_утро": "", "Пт_вечер": "с",
-                "Сб_утро": "с", "Сб_вечер": "",
-                "Вс_утро": "", "Вс_вечер": "с"
-            } 
-        },
-        { 
-            имя: "Уборщик", 
-            тип: "утро-вечер",
-            расписание: { 
-                "Пн_утро": "с", "Пн_вечер": "",
-                "Вт_утро": "", "Вт_вечер": "с",
-                "Ср_утро": "с", "Ср_вечер": "",
-                "Чт_утро": "", "Чт_вечер": "с",
-                "Пт_утро": "с", "Пт_вечер": "",
-                "Сб_утро": "", "Сб_вечер": "с",
-                "Вс_утро": "с", "Вс_вечер": ""
-            } 
-        },
-        { 
-            имя: "Закупщик", 
-            тип: "обычный",
-            расписание: { "Пн": "с", "Вт": "", "Ср": "", "Чт": "с", "Пт": "с", "Сб": "", "Вс": "" } 
-        },
-        { 
-            имя: "Литком", 
-            тип: "обычный",
-            расписание: { "Пн": "с", "Вт": "с", "Ср": "", "Чт": "", "Пт": "с", "Сб": "", "Вс": "с" } 
-        }
+        { имя: "Ведущий", тип: "утро-вечер", расписание: { "Пн_утро": "с", "Пн_вечер": "", "Вт_утро": "", "Вт_вечер": "с", "Ср_утро": "с", "Ср_вечер": "", "Чт_утро": "", "Чт_вечер": "с", "Пт_утро": "с", "Пт_вечер": "", "Сб_утро": "", "Сб_вечер": "с", "Вс_утро": "с", "Вс_вечер": "" } },
+        { имя: "Чайханщик", тип: "утро-вечер", расписание: { "Пн_утро": "", "Пн_вечер": "с", "Вт_утро": "с", "Вт_вечер": "", "Ср_утро": "", "Ср_вечер": "с", "Чт_утро": "с", "Чт_вечер": "", "Пт_утро": "", "Пт_вечер": "с", "Сб_утро": "с", "Сб_вечер": "", "Вс_утро": "", "Вс_вечер": "с" } },
+        { имя: "Уборщик", тип: "утро-вечер", расписание: { "Пн_утро": "с", "Пн_вечер": "", "Вт_утро": "", "Вт_вечер": "с", "Ср_утро": "с", "Ср_вечер": "", "Чт_утро": "", "Чт_вечер": "с", "Пт_утро": "с", "Пт_вечер": "", "Сб_утро": "", "Сб_вечер": "с", "Вс_утро": "с", "Вс_вечер": "" } },
+        { имя: "Закупщик", тип: "обычный", расписание: { "Пн": "с", "Вт": "", "Ср": "", "Чт": "с", "Пт": "с", "Сб": "", "Вс": "" } },
+        { имя: "Литком", тип: "обычный", расписание: { "Пн": "с", "Вт": "с", "Ср": "", "Чт": "", "Пт": "с", "Сб": "", "Вс": "с" } }
     ];
 
     const дниНеделиОбычные = [
-        { короткий: "Пн", полный: "Понедельник" },
-        { короткий: "Вт", полный: "Вторник" },
-        { короткий: "Ср", полный: "Среда" },
-        { короткий: "Чт", полный: "Четверг" },
-        { короткий: "Пт", полный: "Пятница" },
-        { короткий: "Сб", полный: "Суббота" },
+        { короткий: "Пн", полный: "Понедельник" }, { короткий: "Вт", полный: "Вторник" },
+        { короткий: "Ср", полный: "Среда" }, { короткий: "Чт", полный: "Четверг" },
+        { короткий: "Пт", полный: "Пятница" }, { короткий: "Сб", полный: "Суббота" },
         { короткий: "Вс", полный: "Воскресенье" }
     ];
 
     const дниНеделиУтроВечер = [
-        { короткий: "Пн_утро", название: "Пн", подзаголовок: "утро" },
-        { короткий: "Пн_вечер", название: "Пн", подзаголовок: "вечер" },
-        { короткий: "Вт_утро", название: "Вт", подзаголовок: "утро" },
-        { короткий: "Вт_вечер", название: "Вт", подзаголовок: "вечер" },
-        { короткий: "Ср_утро", название: "Ср", подзаголовок: "утро" },
-        { короткий: "Ср_вечер", название: "Ср", подзаголовок: "вечер" },
-        { короткий: "Чт_утро", название: "Чт", подзаголовок: "утро" },
-        { короткий: "Чт_вечер", название: "Чт", подзаголовок: "вечер" },
-        { короткий: "Пт_утро", название: "Пт", подзаголовок: "утро" },
-        { короткий: "Пт_вечер", название: "Пт", подзаголовок: "вечер" },
-        { короткий: "Сб_утро", название: "Сб", подзаголовок: "утро" },
-        { короткий: "Сб_вечер", название: "Сб", подзаголовок: "вечер" },
-        { короткий: "Вс_утро", название: "Вс", подзаголовок: "утро" },
-        { короткий: "Вс_вечер", название: "Вс", подзаголовок: "вечер" }
+        { короткий: "Пн_утро", название: "Пн", подзаголовок: "утро" }, { короткий: "Пн_вечер", название: "Пн", подзаголовок: "вечер" },
+        { короткий: "Вт_утро", название: "Вт", подзаголовок: "утро" }, { короткий: "Вт_вечер", название: "Вт", подзаголовок: "вечер" },
+        { короткий: "Ср_утро", название: "Ср", подзаголовок: "утро" }, { короткий: "Ср_вечер", название: "Ср", подзаголовок: "вечер" },
+        { короткий: "Чт_утро", название: "Чт", подзаголовок: "утро" }, { короткий: "Чт_вечер", название: "Чт", подзаголовок: "вечер" },
+        { короткий: "Пт_утро", название: "Пт", подзаголовок: "утро" }, { короткий: "Пт_вечер", название: "Пт", подзаголовок: "вечер" },
+        { короткий: "Сб_утро", название: "Сб", подзаголовок: "утро" }, { короткий: "Сб_вечер", название: "Сб", подзаголовок: "вечер" },
+        { короткий: "Вс_утро", название: "Вс", подзаголовок: "утро" }, { короткий: "Вс_вечер", название: "Вс", подзаголовок: "вечер" }
     ];
+
+    const descriptionModal = document.getElementById('descriptionModal');
+    const modalServiceTitle = document.getElementById('modalServiceTitle');
+    const modalServiceDescription = document.getElementById('modalServiceDescription');
+    const descriptionModalClose = document.getElementById('descriptionModalClose');
+
+    function openDescriptionModal(serviceName) {
+        modalServiceTitle.textContent = serviceName;
+        modalServiceDescription.textContent = descriptions[serviceName] || "Описание служения пока не добавлено. Скоро появится!";
+        descriptionModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeDescriptionModal() {
+        descriptionModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    descriptionModalClose.addEventListener('click', closeDescriptionModal);
+    descriptionModal.addEventListener('click', (e) => { if (e.target === descriptionModal) closeDescriptionModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && descriptionModal.style.display === 'flex') closeDescriptionModal(); });
 
     function создатьВертикальноеРасписание() {
         const container = document.getElementById("schedule-container");
@@ -1041,7 +903,6 @@
                     значениеСлужения.addEventListener("blur", function() {
                         let новоеЗначение = значениеСлужения.innerText.trim();
                         служащий.расписание[день.короткий] = новоеЗначение;
-                        
                         if (новоеЗначение.toLowerCase() === "с") {
                             значениеСлужения.classList.add("свободно");
                             значениеСлужения.title = "✅ Свободное служение! Можно занять.";
@@ -1049,10 +910,7 @@
                             значениеСлужения.classList.remove("свободно");
                             значениеСлужения.title = "";
                         }
-                        
-                        if (новоеЗначение === "") {
-                            значениеСлужения.innerText = "";
-                        }
+                        if (новоеЗначение === "") значениеСлужения.innerText = "";
                     });
                     
                     деньЯчейка.appendChild(названиеДня);
@@ -1083,7 +941,6 @@
                     значениеСлужения.addEventListener("blur", function() {
                         let новоеЗначение = значениеСлужения.innerText.trim();
                         служащий.расписание[день.короткий] = новоеЗначение;
-                        
                         if (новоеЗначение.toLowerCase() === "с") {
                             значениеСлужения.classList.add("свободно");
                             значениеСлужения.title = "✅ Свободное служение! Можно занять.";
@@ -1091,10 +948,7 @@
                             значениеСлужения.classList.remove("свободно");
                             значениеСлужения.title = "";
                         }
-                        
-                        if (новоеЗначение === "") {
-                            значениеСлужения.innerText = "";
-                        }
+                        if (новоеЗначение === "") значениеСлужения.innerText = "";
                     });
                     
                     деньЯчейка.appendChild(названиеДня);
@@ -1104,21 +958,25 @@
             }
             
             карточка.appendChild(дниСетка);
+            
+            // Кнопка "Подробнее о служении"
+            const кнопка = document.createElement("div");
+            кнопка.className = "кнопка-подробнее";
+            кнопка.innerText = "📖 Подробнее о служении";
+            кнопка.addEventListener("click", () => openDescriptionModal(служащий.имя));
+            карточка.appendChild(кнопка);
+            
             вертикальныйКонтейнер.appendChild(карточка);
         });
         
         container.appendChild(вертикальныйКонтейнер);
     }
 
-    // Запускаем создание расписания и видео
     window.onload = () => {
         создатьВертикальноеРасписание();
         const videoElem = document.querySelector('.video');
-        if (videoElem) {
-            videoElem.play().catch(e => console.log("Автовоспроизведение заблокировано"));
-        }
+        if (videoElem) videoElem.play().catch(e => console.log("Автовоспроизведение заблокировано"));
     };
 </script>
-
 </body>
 </html>
